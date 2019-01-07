@@ -7,11 +7,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AppliController {
-
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="nameGET", required=false, defaultValue="World") String nameGET, Model model) {
-        model.addAttribute("nomTemplate", nameGET);
-        return "greeting";
+    
+    @GetMapping("/index")
+    public String index(Model model) {
+        return "index";
+    }
+    
+    @GetMapping("/navbar")
+    public String navbar(Model model) {
+        return "navbar";
     }
 
 }
