@@ -6,7 +6,7 @@ public abstract class Participant {
 	
 	/// Constructeurs
 	public Participant() {}
-	
+
 	public Participant(String nomParticipant, Adresse adresse) {
 		super();
 		this.nomParticipant = nomParticipant;
