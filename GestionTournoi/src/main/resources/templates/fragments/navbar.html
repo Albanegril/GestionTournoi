@@ -15,23 +15,25 @@
         <title>Blog</title>
     </head>
     <body>
-        <ul id="dropdown1" class="dropdown-content">
-            <li><a href="#!">one</a></li>
-            <li><a href="#!">two</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">three</a></li>
-        </ul>
-        <nav>
-            <div class="nav-wrapper">
-                <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
-                <ul class="right hide-on-smal-and-down">
-                    <li><a href="sass.html"><i class="material-icons">search</i></a></li>
-                    <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">account-circle</i></a></li>
-                    <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
-                </ul>
-            </div>
-        </nav>
+        <div th:fragment="navbar">
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="#!">one</a></li>
+                <li><a href="#!">two</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">three</a></li>
+            </ul>
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
+                    <ul class="right hide-on-smal-and-down">
+                        <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+                        <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+                        <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">account-circle</i></a></li>
+                        <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
