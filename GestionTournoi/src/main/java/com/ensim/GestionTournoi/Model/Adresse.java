@@ -2,7 +2,7 @@ package com.ensim.GestionTournoi.Model;
 
 import javax.persistence.Entity;
 
-@Entity
+
 public class Adresse {
 
 	private int id;
