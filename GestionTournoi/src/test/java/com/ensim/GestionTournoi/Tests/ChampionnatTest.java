@@ -1,4 +1,4 @@
-package com.ensim.GestionTournoi.Model;
+package com.ensim.GestionTournoi.Tests;
 
 import static org.junit.Assert.*;
 
