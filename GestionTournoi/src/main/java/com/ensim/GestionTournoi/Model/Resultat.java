@@ -1,21 +1,28 @@
 package com.ensim.GestionTournoi.Model;
-public abstract class Resultat {
-	private Participant vainqueur;
 
-	///Constructeurs
-	public Resultat() { }
+public abstract class Resultat
+{
+	private Equipe vainqueur;
 
-	public Resultat(Participant vainqueur) {
+	/// Constructeurs
+	public Resultat()
+	{
+	}
+
+	public Resultat(Equipe vainqueur)
+	{
 		super();
 		this.vainqueur = vainqueur;
 	}
-	
-	///Getters & Setters
-	public Participant getVainqueur() {
+
+	/// Getters & Setters
+	public Equipe getVainqueur()
+	{
 		return vainqueur;
 	}
 
-	public void setVainqueur(Participant vainqueur) {
+	public void setVainqueur(Equipe vainqueur)
+	{
 		this.vainqueur = vainqueur;
 	}
 

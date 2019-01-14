@@ -1,53 +1,64 @@
 package com.ensim.GestionTournoi.Model;
 
-public class Adresse {
-	private String ville = new String();
-	private String rue = new String();
-	private String salle = new String();
-	private String terrain = new String();
-	
-	/// Constructeurs
-	public Adresse() {}
+public class Adresse
+{
+	private int id;
+	private String ville;
+	private String rue;
+	private int no;
 
-	public Adresse(String ville, String rue, String salle, String terrain) {
-		super();
-		this.ville = ville;
-		this.rue = rue;
-		this.salle = salle;
-		this.terrain = terrain;
+	/// Constructeurs
+	public Adresse()
+	{
 	}
 
-	/// Getters & Setters 
-	public String getVille() {
+	public Adresse(int id, String ville, String rue, int no)
+	{
+		this.ville = ville;
+		this.rue = rue;
+		this.setId(id);
+		this.setNo(no);
+	}
+
+	/// Getters & Setters
+	public String getVille()
+	{
 		return ville;
 	}
 
-	public void setVille(String ville) {
+	public void setVille(String ville)
+	{
 		this.ville = ville;
 	}
 
-	public String getRue() {
+	public String getRue()
+	{
 		return rue;
 	}
 
-	public void setRue(String rue) {
+	public void setRue(String rue)
+	{
 		this.rue = rue;
 	}
 
-	public String getSalle() {
-		return salle;
+	public int getId()
+	{
+		return id;
 	}
 
-	public void setSalle(String salle) {
-		this.salle = salle;
+	public void setId(int id)
+	{
+		this.id = id;
 	}
 
-	public String getTerrain() {
-		return terrain;
+	public int getNo()
+	{
+		return no;
 	}
 
-	public void setTerrain(String terrain) {
-		this.terrain = terrain;
+	public void setNo(int no)
+	{
+		this.no = no;
 	}
 
 }
