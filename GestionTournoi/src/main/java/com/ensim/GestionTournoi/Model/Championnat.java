@@ -1,9 +1,11 @@
 package com.ensim.GestionTournoi.Model;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+@Entity
 public class Championnat extends Tournoi
 {
 	private int ptsVictoire;
