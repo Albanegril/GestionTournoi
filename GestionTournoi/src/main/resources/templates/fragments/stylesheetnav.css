@@ -1,12 +1,12 @@
 .brand-logo{
-	font-weight:900;
+	font-weight:90;
 }
 
 .dropdown-content {
   background-color: #FFFFFF;
   margin: 0;
   display: none;
-  min-width: 300px; /* Changed this to accomodate content width */
+  min-width: 150px; /* Changed this to accomodate content width */
   max-height: auto;
 	margin-left: -1px; /* Add this to keep dropdown in line with edge of navbar */
   overflow: hidden; /* Changed this from overflow-y:auto; to overflow:hidden; */
@@ -15,4 +15,39 @@
   white-space: nowrap;
   z-index: 1;
   will-change: width, height;
+}
+				
+
+.search
+{
+	overflow: auto;
+}
+
+.search input[type="text"]
+{
+	border: 0px;
+	width: 67%;
+	padding: 10px 10px;
+}
+
+.search input[type="text"]:focus
+{
+	outline: 0;
+}
+
+
+
+/* ===========================
+   ====== Medua Query for Search Box ====== 
+   =========================== */
+
+@media only screen and (min-width : 150px) and (max-width : 780px)
+{
+	{}
+	.search
+	{
+		width: 95%;
+		margin: 0 auto;
+	}
+
 }
