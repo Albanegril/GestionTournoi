@@ -1,11 +1,8 @@
 package com.ensim.GestionTournoi.Model;
 
-
-import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
-
+@Entity
 public class Adresse {
 
 	private int id;
