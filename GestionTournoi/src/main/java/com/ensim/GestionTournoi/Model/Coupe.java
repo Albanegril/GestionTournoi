@@ -2,10 +2,26 @@ package com.ensim.GestionTournoi.Model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Coupe extends Tournoi {
+	
+	//XXX Attributs
 
 	private ArrayList<Equipe> enLice;
+	private ArrayList<Equipe> elimines;
+	
+	//XXX Constructeurs
+	
+	public Coupe() {	}
+
+	public Coupe(int id, String nom, String activite, Date date, ArrayList<Equipe> participants, ArrayList<Adresse> adresses, int nbMatchJour, boolean isPublic, boolean matchRetour)
+	{
+		super(id, nom, activite, date, participants, adresses, nbMatchJour, isPublic);
+	}
+	
+	//XXX Méthodes
+	
 	@Override
 	protected ArrayList<Match> initMatchs(ArrayList<Equipe> participants) {
 		int nbMatch = 0;
@@ -28,6 +44,7 @@ public class Coupe extends Tournoi {
 	@Override
 	protected void gagneMatch(Equipe participant) {
 		// TODO Auto-generated method stub
+		participant.addVictoire();
 
 	}
 
@@ -35,6 +52,8 @@ public class Coupe extends Tournoi {
 	protected void perdMatch(Equipe participant) {
 		// TODO Auto-generated method stub
 		enLice.remove(participant);
+		elimines.add(participant);
+		participant.addDefaite();
 	}
 
 	@Override
@@ -47,5 +66,15 @@ public class Coupe extends Tournoi {
 	protected int nbMatch() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	protected void runCoupe() {
+		enLice= getParticipants();
+		while(enLice.size()>1) {
+			initMatchs(enLice);
+			while(enLice.size()>enLice.size()/2+1) {
+				
+			}
+		}
 	}
 }
