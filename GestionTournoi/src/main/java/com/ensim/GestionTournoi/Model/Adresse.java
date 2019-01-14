@@ -1,10 +1,12 @@
 package com.ensim.GestionTournoi.Model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Adresse {
+public class Adresse implements Serializable {
 
 	@Id
 	private int id;

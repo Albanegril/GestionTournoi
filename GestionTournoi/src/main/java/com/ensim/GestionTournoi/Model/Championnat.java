@@ -1,13 +1,18 @@
 package com.ensim.GestionTournoi.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-public class Championnat extends Tournoi
+public class Championnat extends Tournoi implements Serializable
 {
+	@Id
+	private int idChampionat;
 	private int ptsVictoire;
 	private int ptsMatchNul;
 	private int ptsDefaite;
@@ -15,11 +20,8 @@ public class Championnat extends Tournoi
 	
 	private int[] nbPtsParticipant;
 	
-	public Championnat()
-	{
-		this.nbPtsParticipant = new int[this.getNbParticipant()];
-	}
-	
+	public Championnat() {	}
+
 	public Championnat(int id, String nom, String activite, Date date, ArrayList<Equipe> participants, ArrayList<Adresse> adresses, int nbMatchJour, boolean isPublic, boolean matchRetour)
 	{
 		super(id, nom, activite, date, participants, adresses, nbMatchJour, isPublic);
@@ -87,6 +89,23 @@ public class Championnat extends Tournoi
 		}
 		
 		return nbEquipe * (this.matchRetour ? 2 : 1);
+	}
+	
+	///Getters & Setters 
+	public int getIdChampionat() {
+		return idChampionat;
+	}
+
+	public void setIdChampionat(int idChampionat) {
+		this.idChampionat = idChampionat;
+	}
+
+	public int[] getNbPtsParticipant() {
+		return nbPtsParticipant;
+	}
+
+	public void setNbPtsParticipant(int[] nbPtsParticipant) {
+		this.nbPtsParticipant = nbPtsParticipant;
 	}
 
 	public int getPtsVictoire()
