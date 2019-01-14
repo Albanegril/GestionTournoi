@@ -41,6 +41,42 @@
         <script type="text/javascript">
         $( document ).ready(function)
         </script>
+        <script>
+        $(document).ready(function() {
+	
+	// activate search-bar
+	$(".search-bar").on("click", function() {
+		$(this).addClass("expand");
+		$(".line").addClass("expand");
+		$("input").focus().css("opacity", 1);
+	});
 
+	// handle input value on hover
+	$("input")
+		.hover(function() {
+			$(this).css("opacity", 1);
+		})
+		.mouseleave(function() {
+			if (!$("input").is(":focus") && !".close".is(":hover")) {
+				$(this).css("opacity", 0);
+			}
+		});
+
+	// deactivate search-bar
+	$("input").on("focusout blur", function() {
+		$(".search-bar").removeClass("expand");
+		$(".line").removeClass("expand");
+		$(this).css("opacity", 0);
+	});
+
+	// clean input
+	$(".close").on("click", function() {
+		if ($("input").val().length > 0) {
+			$("input").val("");
+		}
+	});
+	
+});
+</script>
     </body>
 </html>
