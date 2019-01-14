@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http -equiv="Content -Type" content="text/html; charset=UTF -8" />
+
+        <!-- Compiled and minified CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+
+    <script type="text/javascript">
+      M.AutoInit();
+    </script>
+
+    <title>GestionTournois</title> 
+  </head>
+
+  <body>
+  	<div th:replace="fragments/navbar :: navbar">Navbar</div>
+  	
+  	<div class="row">
+      <div class="col l3 offset-l4 s10 offset-s1">
+        <h3>Créer un Tournoi</h3>
+        <form>
+          <div class="input-field col s12">
+            <input id="result1" type="number" class="validate">
+            <label for="result1">Résultat participant 1</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="result2" type="number" class="validate">
+            <label for="result2">Résultat participant 2</label>
+            <input type="submit" value="Valider" class="waves-effect waves-light btn">
+          </div>
+        </form>
+      </div>      
+    </div>
+	
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    
+    <script type="text/javascript">
+      M.AutoInit();
+    </script>
+
+
+    <script type="text/javascript">
+      $('.dropdown-trigger').dropdown();
+    </script>
+  </body>
+</html>
