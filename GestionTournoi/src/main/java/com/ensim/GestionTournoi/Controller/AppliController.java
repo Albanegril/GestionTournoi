@@ -13,9 +13,9 @@ public class AppliController
 		return "index";
 	}
 
-	@GetMapping("/navbar")
-	public String navbar(Model model)
-	{
-		return "navbar";
-	}
+    @GetMapping("/connexion")
+    public String connexion(Model model) {
+        return "connexion";
+    }
+
 }
