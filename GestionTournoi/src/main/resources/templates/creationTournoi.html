@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http -equiv="Content -Type" content="text/html; charset=UTF -8" />
+
+    <!-- Compiled and minified CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="stylesheet.css">
+
+    <script type="text/javascript">
+      M.AutoInit();
+    </script>
+
+    <title>GestionTournois</title> 
+  </head>
+
+  <body>
+    <div th:replace="fragments/navbar :: navbar">Navbar</div>
+    
+    <div class="row">
+      <div class="col l3 offset-l4 s10 offset-s1">
+        <form class="card-panel">
+          <div class="input-field col s12">
+            <input id="nom" type="text" class="validate">
+            <label for="nom">Nom Tournoi</label>
+          </div>
+
+          <div>
+            <h6>Type de tournoi</h6>
+            <p>
+              <input name="group1" type="radio" id="championnat" />
+              <label for="championnat">Championnat</label>
+            </p>
+            <p>
+              <input name="group1" type="radio" id="coupe" />
+              <label for="coupe">Coupe</label>
+            </p>
+          </div>
+        
+          <div>
+            <h6>Type de tournoi</h6>
+            <p>
+              <input name="group1" type="radio" id="public" />
+              <label for="public">Public</label>
+            </p>
+            <p>
+              <input name="group1" type="radio" id="prive" />
+              <label for="prive">Privé</label>
+            </p>
+          </div>
+
+          <input type="submit" value="Créer" class="waves-effect waves-light btn">
+
+        </form>
+      </div>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script type="text/javascript">
+      $('.dropdown-trigger').dropdown();
+    </script>
+  </body>
+</html>

@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AppliController
 {
 	@GetMapping("/index")
-	public String index(Model model)
-	{
+	public String index(Model model){
 		return "index";
 	}
 
@@ -18,4 +17,18 @@ public class AppliController
         return "connexion";
     }
 
+	@GetMapping("/inscription")
+	public String inscription(Model model){
+		return "inscription";
+	}
+
+    @GetMapping("/creationTournoi")
+    public String creationTournoi(Model model) {
+        return "creationTournoi";
+    }
+
+    @GetMapping("/tournoi")
+    public String tournoi(Model model) {
+        return "tournoi";
+    }
 }
