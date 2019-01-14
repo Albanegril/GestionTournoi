@@ -1,4 +1,4 @@
-h4, h6
+h3, h4, h6
 {
 	justity-content:center;
 }
@@ -27,7 +27,7 @@ h4, h6
   will-change: width, height;
 }
 				
-
+/* Navbar */
 .search
 {
 	overflow: auto;

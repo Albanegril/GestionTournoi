@@ -10,11 +10,10 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="./static/js/jquery-bracket/jquery.bracket.min.css" /> <!-- Api affichage match -->
+    <link rel="stylesheet" type="text/css" href="js/jquery-bracket/jquery.bracket.min.css" /> <!-- Api affichage match -->
     <link rel="stylesheet" href="stylesheet.css">
 
     <script type="text/javascript">
-      M.AutoInit();
     </script>
 
     <title>GestionTournois</title> 
@@ -53,6 +52,11 @@
 
           <div class="col l10 s12">
             <img src="#" alt="Mettre ici l'affichage des matchs">
+            
+            <div id="minimal"></div>
+
+            
+
           </div>
         <!--  <a class="waves-effect waves-light btn-large show-on-small">Prochains Matchs</a> -->
           <div class="col l2 hide-on-small" id="ProchainsMatchs"> 
@@ -85,26 +89,46 @@
       
     </div>
 	
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- JavaScript -->
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
-    <!-- API affichage tournoi 
-    <script type="text/javascript" src="http://www.aropupu.fi/bracket/site/jquery-1.6.2.min.js"></script>-->
-    <script type="text/javascript" src="http://www.aropupu.fi/bracket/site/jquery.json-2.2.min.js"></script>
-    <script type="text/javascript" src="./static/js/jquery-bracket/jquery.bracket.min.js"></script>
 
-    
+  <!--   <script type="text/javascript" src="http://www.aropupu.fi/bracket/site/jquery-1.6.2.min.js"></script> -->
+
+ 
+    <script type="text/javascript" src="http://www.aropupu.fi/bracket/site/jquery.json-2.2.min.js"></script>
+
+    <script type="text/javascript" src="js/jquery-bracket/jquery.bracket.min.js"></script>
+
     <script type="text/javascript">
       M.AutoInit();
-    </script>
+    </script> 
 
+     <script type="text/javascript">
+      $('.dropdown-trigger').dropdown();
+    </script> 
 
     <script type="text/javascript">
-      $('.dropdown-trigger').dropdown();
+
+              var minimalData = {
+                  teams : [ 
+                    ["Team 1", "Team 2"], /* first matchup */
+                    ["Team 3", "Team 4"]  /* second matchup */
+                  ],
+                  results : [ 
+                    [ [1,2], [3,4] ],       /* first round */
+                    [ [4,6], [2,1] ]        /* second round */
+                  ]
+                };
+               
+              $(function() {
+                  $('#minimal').bracket({
+                    init: minimalData /* data to initialize the bracket with */ })
+                });
+          
     </script>
   </body>
 </html>
