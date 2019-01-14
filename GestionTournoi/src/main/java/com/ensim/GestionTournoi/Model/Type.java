@@ -4,3 +4,4 @@ public enum Type {
 	Coupe,
 	Championat;
 }
+ // ca va dégager...

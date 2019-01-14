@@ -1,24 +1,26 @@
 package com.ensim.GestionTournoi.Model;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
-
-public abstract class Tournoi
-{
+@Entity
+public class Tournoi {
+    @Id
+    @GeneratedValue
+    private Long id_tournoi;
 	protected Random rand = new Random();
 	private Calendar calendar = Calendar.getInstance();
-	private String nomTournoi;
-	private String activite;
 	private boolean isPublic;
 	private Equipe vainqueur;
 	private int id;
 	private ArrayList<Adresse> adresses = new ArrayList<Adresse>();
 	private ArrayList<Match> matchs;
 	private ArrayList<Equipe> participants = new ArrayList<Equipe>();
-	
+	private String nomTournoi = "";
+	private String activite = "";
 	protected int matchID = 1;
 	protected int nbMatchJour;
 	private HashMap<Integer, Integer> adressesJouees = new HashMap<Integer, Integer>();

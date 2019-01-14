@@ -1,6 +1,15 @@
 package com.ensim.GestionTournoi.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public abstract class Participant {
+
+	@Id
+	@GeneratedValue
+	private Long id_participant;
 	private String nomParticipant = new String();
 	private Adresse adresse = new Adresse();
 	
