@@ -20,12 +20,7 @@
 
 .search
 {
-    white-space: nowrap;
-	border: 2px solid #CF5C3F;
 	overflow: auto;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
 }
 
 .search input[type="text"]
