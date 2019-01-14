@@ -9,7 +9,7 @@ public class Set extends Resultat {
 	///Constructeurs
 	public Set() {	}
 	
-	public Set(ArrayList tabResult1, ArrayList tabResult2, Participant vainqueur) {
+	public Set(ArrayList tabResult1, ArrayList tabResult2, Equipe vainqueur) {
 		super(vainqueur);
 		this.tabResult1 = tabResult1;
 		this.tabResult2 = tabResult2;

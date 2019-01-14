@@ -7,7 +7,7 @@ public class Default extends Resultat {
 	///Constructeurs
 	public Default() {	}
 
-	public Default(int resultat1, int resultat2, Participant vainqueur) {
+	public Default(int resultat1, int resultat2, Equipe vainqueur) {
 		super(vainqueur);
 		this.resultat1 = resultat1;
 		this.resultat2 = resultat2;

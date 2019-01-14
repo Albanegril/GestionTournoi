@@ -5,11 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+
 public class Adresse {
 
-    @Id
-    @GeneratedValue
 	private int id;
 	private String ville;
 	private String rue;

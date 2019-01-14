@@ -6,10 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
-@Entity
-public class Tournoi {
-    @Id
-    @GeneratedValue
+
+
+public abstract class Tournoi {
+
     private Long id_tournoi;
 	protected Random rand = new Random();
 	private Calendar calendar = Calendar.getInstance();
