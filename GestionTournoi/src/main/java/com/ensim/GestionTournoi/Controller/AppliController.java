@@ -31,4 +31,9 @@ public class AppliController
     public String tournoi(Model model) {
         return "tournoi";
     }
+
+    @GetMapping("/resultatMatch")
+    public String resultatMatch(Model model) {
+        return "resultatMatch";
+    }
 }
