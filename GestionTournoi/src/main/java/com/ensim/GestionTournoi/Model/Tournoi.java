@@ -41,6 +41,14 @@ public abstract class Tournoi {
 		this.matchs = this.initMatchs(participants);
 	}
 
+	public ArrayList<Equipe> getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(ArrayList<Equipe> participants) {
+		this.participants = participants;
+	}
+
 	//XXX Methodes
 	protected abstract ArrayList<Match> initMatchs(ArrayList<Equipe> participant);
 	
