@@ -5,19 +5,25 @@ import java.util.ArrayList;
 public class Joueur
 {
 	private String nom;
-	private Adresse adresse;
 	private final int id;
 	private int nbVictoire;
 	private int nbDefaite;
 	private ArrayList<String> palmares = new ArrayList<String>();
 	
-	public Joueur(int id, String nom, Adresse adresse)
+	public Joueur(int id, String nom)
 	{
 		this.id = id;
 		this.setNom(nom);
-		this.setAdresse(adresse);
+	}
+	
+	//XXX Méthodes
+	
+	public String toString()
+	{
+		return "Joueur {id=" + id + ", nom=" + nom + "}";
 	}
 
+	//XXX Getters & Setters
 	public String getNom()
 	{
 		return nom;
@@ -26,16 +32,6 @@ public class Joueur
 	public void setNom(String nom)
 	{
 		this.nom = nom;
-	}
-
-	public Adresse getAdresse()
-	{
-		return adresse;
-	}
-
-	public void setAdresse(Adresse adresse)
-	{
-		this.adresse = adresse;
 	}
 
 	public int getId()

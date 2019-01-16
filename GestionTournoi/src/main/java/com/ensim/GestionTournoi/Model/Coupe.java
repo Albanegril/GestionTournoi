@@ -59,7 +59,7 @@ public class Coupe extends Tournoi implements Serializable {
 			cal.setTime(this.getDateDebut());
 			cal.add(Calendar.DAY_OF_YEAR, nbMatch / this.nbMatchJour);
 			
-			matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse()));
+			matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse(0)));
 		}
 		
 		// TODO Auto-generated method stub

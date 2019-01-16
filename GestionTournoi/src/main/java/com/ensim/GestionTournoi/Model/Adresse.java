@@ -8,28 +8,35 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Adresse implements Serializable {
-
+public class Adresse implements Serializable
+{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String ville;
 	private String rue;
-	private int no;
 
 	/// Constructeurs
 	public Adresse()
 	{
 	}
 
-	public Adresse(String ville, String rue, int no)
+	public Adresse(int id, String ville, String rue)
 	{
 		this.ville = ville;
 		this.rue = rue;
-		this.setNo(no);
+		this.setId(id);
 	}
 
-	/// Getters & Setters
+	//XXX Méthodes
+	
+	public String toString()
+	{
+		//return "Adresse {id=" + id + ", Adresse : " + rue + ", " + ville + "}";
+		return rue + ", " + ville;
+	}
+
+	//XXX Getters & Setters
 	public String getVille()
 	{
 		return ville;
@@ -59,15 +66,4 @@ public class Adresse implements Serializable {
 	{
 		this.id = id;
 	}
-
-	public int getNo()
-	{
-		return no;
-	}
-
-	public void setNo(int no)
-	{
-		this.no = no;
-	}
-
 }

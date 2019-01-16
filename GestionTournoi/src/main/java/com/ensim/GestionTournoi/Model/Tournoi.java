@@ -1,46 +1,45 @@
 package com.ensim.GestionTournoi.Model;
 
-import org.json.JSONObject;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
-
-public abstract class Tournoi {
-
-    private Long id_tournoi;
-	protected Random rand = new Random();
-	private Calendar calendar = Calendar.getInstance();
+public abstract class Tournoi
+{
+	/**
+	 * Attributs ci-dessous à sérialiser
+	 */
 	private boolean isPublic;
 	private Equipe vainqueur;
 	private int id;
-	private ArrayList<Adresse> adresses = new ArrayList<Adresse>();
-	private ArrayList<Match> matchs;
-	private ArrayList<Equipe> participants = new ArrayList<Equipe>();
-	private String nomTournoi = "";
-	private String activite = "";
-	protected int matchID = 1;
+	private List<Adresse> adresses = new ArrayList<Adresse>();
+	protected List<Match> matchs;
+	private List<Equipe> participants = new ArrayList<Equipe>();
+	private String nomTournoi;
+	private String activite;
 	protected int nbMatchJour;
-	private HashMap<Integer, Integer> adressesJouees = new HashMap<Integer, Integer>();
-
-	private String json = "";
+	
+	/**
+	 * Attributs ci-dessous à NE PAS sérialiser !!!
+	 */
+	protected Random rand = new Random();
+	private Calendar calendar = Calendar.getInstance();
+	protected int matchID = 1;
+	protected HashMap<Integer, Integer> adressesJouees = new HashMap<Integer, Integer>();
+	protected ArrayList<Adresse> adressesDispo = new ArrayList<Adresse>();
 
 	public String getJson()
 	{
-		String result ="{\n\n" +
-				"  \"teams\": [\n\n";
+		String result ="{\n\t\"matchs\": [\n";
 
-		for(Match m:matchs)
+		for(int i=0;i<matchs.size();i++)
 		{
-			result+= "[\""+m.getEquipe(0).getNom()+"\",\""+m.getEquipe(1).getNom()+"\"]\n\n";
+			result+= "\t\t[\""+matchs.get(i).getEquipe(0).getNom()+"\",\""+matchs.get(i).getEquipe(1).getNom()+"\"]" + (i==this.matchs.size()-1 ? "" : ", ") + "\n";
 		}
-		result+="],\n\n" +
-				"  \"results\": [\r\n" +
-				"      [";
+		result+="\t],\n\n\t\"results\": [\r\n\t\t[\n";
 
 		int nbParticipant = this.participants.size();
 		int power = 0;
@@ -52,94 +51,101 @@ public abstract class Tournoi {
 		int z =0;
 		for(int i = 0;i<power;i++)
 		{
-			result+="[";
+			result+="\t\t\t[\n";
 			for(int y = 0;y<participants.size();y++)
 			{
 				if(vainqueur==null)
 				{
-					result +="[null,null],";
+					result +="\t\t\t\t[null,null]" + (y==participants.size()-1 ? "" : ",") + "\n";
 				}
 				else
 				{
-					result += "["+((ResultatDefault)matchs.get(z).getResultat()).getScore(0)
-						+","+((ResultatDefault)matchs.get(z).getResultat()).getScore(1)+"],";
+					result += "\t\t\t\t["+((ResultatDefault)matchs.get(z).getResultat()).getScore(0)
+						+","+((ResultatDefault)matchs.get(z).getResultat()).getScore(1)+"]" + (y==participants.size()-1 ? "" : ",") + "\n";
 				}
 				z++;
 			}
-			result+="],\n\n";
+			result+="\t\t\t]" + (i==power-1 ? "" : ",") + "\n";
 		}
-		result+="]\n\n" +
-				"  ]\n\n" +
-				"};";
+		result+="\t\t]\n\t]\n}";
 		return result;
 	}
 
 	public Tournoi() {}
 	
-	public Tournoi(int id, String nomTournoi, String activite, Date date, ArrayList<Equipe> participants, ArrayList<Adresse> adresses, int nbMatchJour, boolean isPublic)
+	@SuppressWarnings("unchecked")
+	public Tournoi(int id, String nomTournoi, String activite, Date date, List<Equipe> participants, List<Adresse> adresses, int nbMatchJour, boolean isPublic)
 	{
 		this.nomTournoi = nomTournoi;
 		this.activite = activite;
 		this.isPublic = isPublic;
 		this.id = id;
+		this.participants = participants;
 		this.adresses = adresses;
 		this.setDateDebut(date);
 		this.nbMatchJour = nbMatchJour;
-		
-		this.matchs = this.initMatchs(participants);
-	}
 
-	public ArrayList<Equipe> getParticipants() {
-		return participants;
-	}
-
-	public void setParticipants(ArrayList<Equipe> participants) {
-		this.participants = participants;
+		this.adressesDispo = (ArrayList<Adresse>) ((ArrayList<Adresse>) this.adresses).clone();
+		//this.matchs = this.initMatchs(participants);
 	}
 
 	//XXX Methodes
-	protected abstract ArrayList<Match> initMatchs(ArrayList<Equipe> participant);
-	
+	protected abstract List<Match> initMatchs(List<Equipe> participant);
+
 	protected abstract void gagneMatch(Equipe participant);
 
-	protected abstract void perdMatch(Equipe participant);	
+	protected abstract void perdMatch(Equipe participant);
 
 	protected abstract void nulMatch(Equipe participant);
-	
+
 	protected abstract int nbMatch();
-	
+
 	protected int genereMatchId()
 	{
-		return Integer.parseInt(Integer.toString(this.id) + Integer.toString(this.matchID));
+		return Integer.parseInt(Integer.toString(this.id) + Integer.toString(this.matchID++));
 	}
-	
-	private int maxAddrUse()
+/*
+	public int maxAddrUse()
 	{
-		float max = (float)this.nbMatch() / (float)this.adresses.size();
-		int maxAddrUse = this.nbMatch() / this.adresses.size();
-		
+		float max = (float) nbMatch() / (float) this.adresses.size();
+		int maxAddrUse = nbMatch() / this.adresses.size();
+
 		return maxAddrUse + (max > maxAddrUse ? 1 : 0);
 	}
-	
-	protected Adresse getMatchAdresse()
+
+	protected Adresse getMatchAdresse(int nbMatch)
 	{
-		 Adresse addr = this.adresses.get(rand.nextInt(this.adresses.size() - 1));
-		
-		if(!this.adressesJouees.containsKey(addr.getId()) || this.adressesJouees.get(addr.getId()) < this.maxAddrUse())
+		if(this.adressesDispo.size() == 0)
 		{
-			if(!this.adressesJouees.containsKey(addr.getId()))
+			return null;
+		}
+		
+		//System.out.println(this.maxAddrUse(nbMatch));
+		
+		int index = rand.nextInt(this.adressesDispo.size());
+		
+		Adresse addr = this.adressesDispo.get(index);
+
+		if (!this.adressesJouees.containsKey(addr.getId()) || this.adressesJouees.get(addr.getId()) < this.maxAddrUse())
+		{
+			if (!this.adressesJouees.containsKey(addr.getId()))
 			{
 				this.adressesJouees.put(addr.getId(), 0);
 			}
-			
+
 			this.adressesJouees.replace(addr.getId(), this.adressesJouees.get(addr.getId()) + 1);
-			
+
 			return addr;
 		}
 		
-		return this.getMatchAdresse();
-	}
+		else
+		{
+			this.adressesDispo.remove(index);
+		}
 
+		return this.getMatchAdresse(nbMatch);
+	}
+*/
 	//XXX Getters & Setters
 	public String getNomTournoi()
 	{
@@ -171,12 +177,12 @@ public abstract class Tournoi {
 		this.isPublic = isPublic;
 	}
 
-	public ArrayList<Match> getMatchs()
+	public List<Match> getMatchs()
 	{
 		return matchs;
 	}
 
-	public void setMatchs(ArrayList<Match> matchs)
+	public void setMatchs(List<Match> matchs)
 	{
 		this.matchs = matchs;
 	}
@@ -201,12 +207,12 @@ public abstract class Tournoi {
 		return id;
 	}
 
-	public ArrayList<Adresse> getAdresses()
+	public List<Adresse> getAdresses()
 	{
 		return adresses;
 	}
 
-	public void setAdresses(ArrayList<Adresse> adresses)
+	public void setAdresses(List<Adresse> adresses)
 	{
 		this.adresses = adresses;
 	}
@@ -239,5 +245,15 @@ public abstract class Tournoi {
 	public void setCalendar(Calendar calendar)
 	{
 		this.calendar = calendar;
+	}
+
+	public List<Equipe> getParticipants()
+	{
+		return participants;
+	}
+
+	public void setParticipants(List<Equipe> participants)
+	{
+		this.participants = participants;
 	}
 }
