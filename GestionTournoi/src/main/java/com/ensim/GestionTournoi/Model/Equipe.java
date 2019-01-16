@@ -16,8 +16,15 @@ public class Equipe
 		this.id = id;
 		this.setJoueurs(joueurs);
 	}
+	
+	//XXX Méthodes
+	
+	public String toString()
+	{
+		return "Equipe {id=" + id + ", nom=" + nom + "}";
+	}
 
-	/// Getters & Setters
+	//XXX Getters & Setters
 	public String getNom()
 	{
 		return nom;

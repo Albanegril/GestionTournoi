@@ -1,42 +1,65 @@
 package com.ensim.GestionTournoi.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.json.JSONObject;
 
-public class Coupe extends Tournoi {
+@Entity
+public class Coupe extends Tournoi implements Serializable {
 	
 	//XXX Attributs
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	private Long idCoupe;
+	private List<Equipe> enLice;
+	private List<Equipe> elimines;
 
-	private ArrayList<Equipe> enLice;
-	private ArrayList<Equipe> elimines;
+	//XXX Constructors
 
-
-	//XXX Constructeurs
-	
 	public Coupe() {	}
 
-	public Coupe(int id, String nom, String activite, Date date, ArrayList<Equipe> participants, ArrayList<Adresse> adresses, int nbMatchJour, boolean isPublic, boolean matchRetour)
-	{
-		super(id, nom, activite, date, participants, adresses, nbMatchJour, isPublic);
+	
+	//XXX Gettres & Settres
+	public Long getIdCoupe() {
+		return idCoupe;
+	}
+
+	public void setIdCoupe(Long idCoupe) {
+		this.idCoupe = idCoupe;
+	}
+
+	public void setEnLice(List<Equipe> enLice) {
+		this.enLice = enLice;
+	}
+
+	public void setElimines(List<Equipe> elimines) {
+		this.elimines = elimines;
 	}
 	
 	//XXX Méthodes
 	
 	@Override
-	protected ArrayList<Match> initMatchs(ArrayList<Equipe> participants) {
+	protected List<Match> initMatchs(List<Equipe> enLice2) {
 		int nbMatch = 0;
-		ArrayList<Match> matchs = new ArrayList<Match>();
-		for(int i=0; i<participants.size();i=i+2) {
+		List<Match> matchs = new ArrayList<Match>();
+		for(int i=0; i<enLice2.size();i=i+2) {
 			nbMatch++;
-			Equipe[] tab = {participants.get(i), participants.get(i+1)};
+			Equipe[] tab = {enLice2.get(i), enLice2.get(i+1)};
 			
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(this.getDateDebut());
 			cal.add(Calendar.DAY_OF_YEAR, nbMatch / this.nbMatchJour);
 			
-			matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse()));
+			matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse(0)));
 		}
 		
 		// TODO Auto-generated method stub
@@ -79,4 +102,5 @@ public class Coupe extends Tournoi {
 			}
 		}
 	}
+
 }

@@ -1,12 +1,13 @@
 package com.ensim.GestionTournoi.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Championnat extends Tournoi implements Serializable
@@ -17,52 +18,94 @@ public class Championnat extends Tournoi implements Serializable
 	private int ptsMatchNul;
 	private int ptsDefaite;
 	private boolean matchRetour;
-	
+
 	private int[] nbPtsParticipant;
-	
-	public Championnat() {	}
+
+	public Championnat()
+	{
+	}
 
 	public Championnat(int id, String nom, String activite, Date date, ArrayList<Equipe> participants, ArrayList<Adresse> adresses, int nbMatchJour, boolean isPublic, boolean matchRetour)
 	{
 		super(id, nom, activite, date, participants, adresses, nbMatchJour, isPublic);
+		this.matchRetour = matchRetour;
 		this.nbPtsParticipant = new int[this.getNbParticipant()];
+		this.matchs = this.initMatchs(participants);
 	}
-	
+
 	@Override
-	public ArrayList<Match> initMatchs(ArrayList<Equipe> participants)
+	public ArrayList<Match> initMatchs(List<Equipe> participants)
 	{
 		ArrayList<Match> matchs = new ArrayList<Match>();
 		int nbMatch = 0;
-		
-		for(int i=0;i<(this.matchRetour ? 1:2);i++)
+
+		for (int i = 0; i < (this.matchRetour ? 2 : 1); i++)
 		{
-			for(Equipe p : participants)
+			for (int j=0;j<participants.size();j++)
 			{
-				for(Equipe q : participants)
+				for (int k=j+1;k<participants.size();k++)
 				{
-					if(!p.equals(q))
-					{
-						nbMatch++;
-						Equipe[] tab = {p, q};
-						
-						Calendar cal = Calendar.getInstance();
-						cal.setTime(this.getDateDebut());
-						cal.add(Calendar.DAY_OF_YEAR, nbMatch / this.nbMatchJour);
-						
-						matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse()));
-					}
+					Equipe[] tab = { participants.get(j), participants.get(k) };
+
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(this.getDateDebut());
+					cal.add(Calendar.DAY_OF_YEAR, nbMatch++ / this.nbMatchJour);
+
+					matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse(this.nbMatch())));
 				}
 			}
 		}
-		
+
 		return matchs;
+	}
+
+
+	public int maxAddrUse()
+	{
+		float max = (float) nbMatch() / (float) this.getAdresses().size();
+		int maxAddrUse = nbMatch() / this.getAdresses().size();
+
+		return maxAddrUse + (max > maxAddrUse ? 1 : 0);
+	}
+
+	protected Adresse getMatchAdresse(int nbMatch)
+	{
+		if(this.adressesDispo.size() == 0)
+		{
+			return null;
+		}
+		
+		//System.out.println(this.maxAddrUse(nbMatch));
+		
+		int index = rand.nextInt(this.adressesDispo.size());
+		
+		Adresse addr = this.adressesDispo.get(index);
+
+		if (!this.adressesJouees.containsKey(addr.getId()) || this.getAdressesJouees().get(addr.getId()) < this.maxAddrUse())
+		{
+			if (!this.adressesJouees.containsKey(addr.getId()))
+			{
+				this.adressesJouees.put(addr.getId(), 0);
+			}
+
+			this.adressesJouees.replace(addr.getId(), this.adressesJouees.get(addr.getId()) + 1);
+
+			return addr;
+		}
+		
+		else
+		{
+			this.adressesDispo.remove(index);
+		}
+
+		return this.getMatchAdresse(nbMatch);
 	}
 
 	@Override
 	public void gagneMatch(Equipe equipe)
 	{
 		this.nbPtsParticipant[equipe.getId()] += this.ptsVictoire;
-		equipe.addVictoire();		
+		equipe.addVictoire();
 	}
 
 	@Override
@@ -71,40 +114,49 @@ public class Championnat extends Tournoi implements Serializable
 		this.nbPtsParticipant[equipe.getId()] += this.ptsDefaite;
 		equipe.addDefaite();
 	}
-	
+
 	@Override
 	public void nulMatch(Equipe equipe)
 	{
 		this.nbPtsParticipant[equipe.getId()] += this.ptsMatchNul;
 	}
-	
+
 	@Override
-	protected int nbMatch()
+	public int nbMatch()
 	{
 		int nbEquipe = 0;
-		
-		for(int i=0;i<this.getNbParticipant();i++)
+
+		for (int i = 0; i < this.getNbParticipant(); i++)
 		{
 			nbEquipe += i;
 		}
-		
+
 		return nbEquipe * (this.matchRetour ? 2 : 1);
 	}
+
+	public int getEquipePts(Equipe equipe)
+	{
+		return this.nbPtsParticipant[equipe.getId()];
+	}
 	
-	///Getters & Setters 
-	public int getIdChampionat() {
+	/// Getters & Setters
+	public int getIdChampionat()
+	{
 		return idChampionat;
 	}
 
-	public void setIdChampionat(int idChampionat) {
+	public void setIdChampionat(int idChampionat)
+	{
 		this.idChampionat = idChampionat;
 	}
 
-	public int[] getNbPtsParticipant() {
+	public int[] getNbPtsParticipant()
+	{
 		return nbPtsParticipant;
 	}
 
-	public void setNbPtsParticipant(int[] nbPtsParticipant) {
+	public void setNbPtsParticipant(int[] nbPtsParticipant)
+	{
 		this.nbPtsParticipant = nbPtsParticipant;
 	}
 
@@ -146,10 +198,5 @@ public class Championnat extends Tournoi implements Serializable
 	public void setMatchRetour(boolean matchRetour)
 	{
 		this.matchRetour = matchRetour;
-	}
-	
-	public int getEquipePts(Equipe equipe)
-	{
-		return this.nbPtsParticipant[equipe.getId()];
 	}
 }
