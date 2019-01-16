@@ -62,5 +62,5 @@ public class AppliController
     /*@RequestMapping(value = "message", method = RequestMethod.GET)
     public String messages(Model model) {
         return "";
-    }
+    }*/
 }
