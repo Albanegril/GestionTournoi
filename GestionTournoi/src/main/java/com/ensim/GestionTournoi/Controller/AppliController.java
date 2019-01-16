@@ -15,40 +15,52 @@ public class AppliController
     @Autowired
     AdresseRepository adrDAO;
 
-	@GetMapping("/index")
-	public String index(Model model){
-        Adresse test1 = new Adresse(0, "Peymeinade","156 Av des Jaisous");
+    @GetMapping("/index")
+    public String index(Model model)
+    {
+        Adresse test1 = new Adresse(0, "Peymeinade", "156 Av des Jaisous");
         adrDAO.save(test1);
-	    return "index";
-	}
+        return "index";
+    }
 
     @GetMapping("/connexion")
-    public String connexion(Model model) {
+    public String connexion(Model model)
+    {
         return "connexion";
     }
 
-	@GetMapping("/inscription")
-	public String inscription(Model model){
-		return "inscription";
-	}
+    @GetMapping("/inscription")
+    public String inscription(Model model)
+    {
+        return "inscription";
+    }
 
     @GetMapping("/creationTournoi")
-    public String creationTournoi(Model model) {
+    public String creationTournoi(Model model)
+    {
         return "creationTournoi";
     }
 
     @GetMapping("/tournoi")
-    public String tournoi(Model model) {
+    public String tournoi(Model model)
+    {
         return "tournoi";
     }
 
     @GetMapping("/resultatMatch")
-    public String resultatMatch(Model model) {
+    public String resultatMatch(Model model)
+    {
         return "resultatMatch";
     }
 
-    @RequestMapping(value = "message", method = RequestMethod.GET)
+    @GetMapping("/affichageTournoi")
+    public String affichageTournoi(Model model)
+    {
+        return "affichageTournoi";
+    }
+
+    /*@RequestMapping(value = "message", method = RequestMethod.GET)
     public String messages(Model model) {
         return "";
-    }
+    }*/
 }

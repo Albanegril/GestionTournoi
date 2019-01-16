@@ -1,45 +1,79 @@
 package com.ensim.GestionTournoi.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class Coupe extends Tournoi
-{
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-	// XXX Attributs
+import javax.persistence.Transient;
+
+
+import org.json.JSONObject;
+
+@Entity
+public class Coupe extends Tournoi implements Serializable {
+	
+	//XXX Attributs
+	@Id
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	private Long idCoupe;
+
+	//XXX Constructors
 
 	private List<Equipe> enLice;
 	private List<Equipe> elimines;
 
-	// XXX Constructeurs
+	@Transient
+	private List<Equipe> enLice;
+	@Transient
+	private List<Equipe> elimines;
 
-	public Coupe()
-	{
+	//XXX Constructors
+
+	public Coupe() {	}
+
+	
+	//XXX Gettres & Settres
+	public Long getIdCoupe() {
+		return idCoupe;
 	}
 
-	public Coupe(int id, String nom, String activite, Date date, ArrayList<Equipe> participants, ArrayList<Adresse> adresses, int nbMatchJour, boolean isPublic, boolean matchRetour)
-	{
-		super(id, nom, activite, date, participants, adresses, nbMatchJour, isPublic);
+	public void setIdCoupe(Long idCoupe) {
+		this.idCoupe = idCoupe;
 	}
 
-	// XXX Méthodes
+	public void setEnLice(List<Equipe> enLice) {
+		this.enLice = enLice;
+	}
 
+	public void setElimines(List<Equipe> elimines) {
+		this.elimines = elimines;
+	}
+	
+	//XXX Méthodes
+	
 	@Override
-	protected List<Match> initMatchs(List<Equipe> participants)
-	{
+	protected List<Match> initMatchs(List<Equipe> enLice2) {
 		int nbMatch = 0;
-		ArrayList<Match> matchs = new ArrayList<Match>();
-		for (int i = 0; i < participants.size(); i = i + 2)
-		{
-			Equipe[] tab = { participants.get(i), participants.get(i + 1) };
-
+		List<Match> matchs = new ArrayList<Match>();
+		for(int i=0; i<enLice2.size();i=i+2) {
+			nbMatch++;
+			Equipe[] tab = {enLice2.get(i), enLice2.get(i+1)};
+			
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(this.getDateDebut());
-			cal.add(Calendar.DAY_OF_YEAR, nbMatch++ / this.nbMatchJour);
+			cal.add(Calendar.DAY_OF_YEAR, nbMatch / this.nbMatchJour);
+			
 
-			matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse(0)));
+
+		//	matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse(0)));
+
 		}
 
 		return matchs;
@@ -121,4 +155,5 @@ public class Coupe extends Tournoi
 			}
 		}
 	}
+
 }
