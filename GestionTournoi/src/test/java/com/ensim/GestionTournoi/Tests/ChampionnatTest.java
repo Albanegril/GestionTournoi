@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -15,6 +16,7 @@ import com.ensim.GestionTournoi.Model.Championnat;
 import com.ensim.GestionTournoi.Model.Equipe;
 import com.ensim.GestionTournoi.Model.Joueur;
 import com.ensim.GestionTournoi.Model.Match;
+import com.ensim.GestionTournoi.Model.ResultatDefault;
 
 public class ChampionnatTest
 {
@@ -91,6 +93,14 @@ public class ChampionnatTest
 		{
 			e.printStackTrace();
 		}
+		
+		for(int i=0;i<chp.getMatchs().size();i++)
+		{
+			int g = new Random().nextInt(2), p = 1 - g;
+			
+			chp.gagneMatch(chp.getMatchs().get(i).getEquipe(g));
+			chp.perdMatch(chp.getMatchs().get(i).getEquipe(p));
+		}
 	}
 
 	@Test
@@ -111,6 +121,43 @@ public class ChampionnatTest
 		try
 		{
 			FileWriter fileWriter = new FileWriter("test.json");
+			BufferedWriter writer = new BufferedWriter(fileWriter);
+			
+			writer.write(chp.getJson());		
+			writer.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		for(int i=0;i<chp.getMatchs().size();i++)
+		{
+			int[] score = {new Random().nextInt(16), new Random().nextInt(16)};
+			
+			int g = score[0] > score[1] ? 0 : 1;
+			int p = Math.abs(g - 1);
+			
+			if(score[0] != score[1])
+			{
+				chp.gagneMatch(chp.getMatchs().get(i).getEquipe(g));
+				chp.perdMatch(chp.getMatchs().get(i).getEquipe(p));	
+			}
+			
+			else
+			{
+				chp.nulMatch(chp.getMatchs().get(i).getEquipe(g));
+				chp.nulMatch(chp.getMatchs().get(i).getEquipe(p));	
+			}
+			
+			chp.getMatchs().get(i).setResultat(new ResultatDefault(score, chp.getMatchs().get(i).getEquipe(g)));
+		}
+		
+		chp.setVainqueur(chp.vainqueur());
+		
+		try
+		{
+			FileWriter fileWriter = new FileWriter("test2.json");
 			BufferedWriter writer = new BufferedWriter(fileWriter);
 			
 			writer.write(chp.getJson());		

@@ -26,6 +26,8 @@ public class Coupe extends Tournoi implements Serializable {
 
 	//XXX Constructors
 
+	private List<Equipe> enLice;
+	private List<Equipe> elimines;
 
 	@Transient
 	private List<Equipe> enLice;
@@ -73,44 +75,83 @@ public class Coupe extends Tournoi implements Serializable {
 		//	matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse(0)));
 
 		}
-		
-		// TODO Auto-generated method stub
+
 		return matchs;
 	}
+	
+	public int maxAddrUse()
+	{
+		float max = (float) nbMatch() / (float) this.getAdresses().size();
+		int maxAddrUse = nbMatch() / this.getAdresses().size();
 
-	@Override
-	protected void gagneMatch(Equipe participant) {
-		// TODO Auto-generated method stub
-		participant.addVictoire();
+		return maxAddrUse + (max > maxAddrUse ? 1 : 0);
+	}
 
+	protected Adresse getMatchAdresse(int nbMatch)
+	{
+		if(this.adressesDispo.size() == 0)
+		{
+			return null;
+		}
+		
+		int index = rand.nextInt(this.adressesDispo.size());
+		
+		Adresse addr = this.adressesDispo.get(index);
+
+		if (!this.adressesJouees.containsKey(addr.getId()) || this.getAdressesJouees().get(addr.getId()) < this.maxAddrUse())
+		{
+			if (!this.adressesJouees.containsKey(addr.getId()))
+			{
+				this.adressesJouees.put(addr.getId(), 0);
+			}
+
+			this.adressesJouees.replace(addr.getId(), this.adressesJouees.get(addr.getId()) + 1);
+
+			return addr;
+		}
+		
+		else
+		{
+			this.adressesDispo.remove(index);
+		}
+
+		return this.getMatchAdresse(nbMatch);
 	}
 
 	@Override
-	protected void perdMatch(Equipe participant) {
-		// TODO Auto-generated method stub
+	protected void gagneMatch(Equipe participant)
+	{
+		participant.addVictoire();
+	}
+
+	@Override
+	protected void perdMatch(Equipe participant)
+	{
 		enLice.remove(participant);
 		elimines.add(participant);
 		participant.addDefaite();
 	}
 
 	@Override
-	protected void nulMatch(Equipe participant) {
-		// TODO Auto-generated method stub
-		
+	protected void nulMatch(Equipe participant)
+	{
 	}
 
 	@Override
-	protected int nbMatch() {
-		// TODO Auto-generated method stub
+	protected int nbMatch()
+	{
 		return 0;
 	}
-	
-	protected void runCoupe() {
-		enLice= getParticipants();
-		while(enLice.size()>1) {
+
+	protected void runCoupe()
+	{
+		enLice = getParticipants();
+		while (enLice.size() > 1)
+		{
 			initMatchs(enLice);
-			while(enLice.size()>enLice.size()/2+1) {
-				
+			while (enLice.size() > enLice.size() / 2 + 1)
+			{
+
 			}
 		}
 	}

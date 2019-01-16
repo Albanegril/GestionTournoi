@@ -1,0 +1,25 @@
+{
+	"matchs": [
+		["La bonne mère","Fond dans la bouche pas dans la main"], 
+		["La bonne mère","Les gilets jaunes"], 
+		["Fond dans la bouche pas dans la main","Les gilets jaunes"], 
+		["La bonne mère","Fond dans la bouche pas dans la main"], 
+		["La bonne mère","Les gilets jaunes"], 
+		["Fond dans la bouche pas dans la main","Les gilets jaunes"]
+	],
+
+	"results": [
+		[
+			[
+				[2,13],
+				[4,7],
+				[14,10]
+			],
+			[
+				[7,3],
+				[10,6],
+				[0,1]
+			]
+		]
+	]
+}
