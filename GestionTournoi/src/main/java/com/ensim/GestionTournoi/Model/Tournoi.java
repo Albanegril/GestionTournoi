@@ -54,7 +54,8 @@ public abstract class Tournoi
 			result+="\t\t\t[\n";
 			for(int y = 0;y<participants.size();y++)
 			{
-				if(vainqueur==null)
+				//if(vainqueur==null)
+				if(matchs.get(power).getResultat() == null)
 				{
 					result +="\t\t\t\t[null,null]" + (y==participants.size()-1 ? "" : ",") + "\n";
 				}

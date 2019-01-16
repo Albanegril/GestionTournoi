@@ -25,5 +25,4 @@ public abstract class Resultat
 	{
 		this.vainqueur = vainqueur;
 	}
-
 }

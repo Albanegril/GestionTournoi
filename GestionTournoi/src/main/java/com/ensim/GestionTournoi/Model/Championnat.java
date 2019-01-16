@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@SuppressWarnings("serial")
 @Entity
 public class Championnat extends Tournoi implements Serializable
 {
@@ -33,7 +34,6 @@ public class Championnat extends Tournoi implements Serializable
 		this.matchs = this.initMatchs(participants);
 	}
 
-	@Override
 	public ArrayList<Match> initMatchs(List<Equipe> participants)
 	{
 		ArrayList<Match> matchs = new ArrayList<Match>();
@@ -59,7 +59,6 @@ public class Championnat extends Tournoi implements Serializable
 		return matchs;
 	}
 
-
 	public int maxAddrUse()
 	{
 		float max = (float) nbMatch() / (float) this.getAdresses().size();
@@ -74,8 +73,6 @@ public class Championnat extends Tournoi implements Serializable
 		{
 			return null;
 		}
-		
-		//System.out.println(this.maxAddrUse(nbMatch));
 		
 		int index = rand.nextInt(this.adressesDispo.size());
 		
@@ -137,6 +134,23 @@ public class Championnat extends Tournoi implements Serializable
 	public int getEquipePts(Equipe equipe)
 	{
 		return this.nbPtsParticipant[equipe.getId()];
+	}
+	
+	public Equipe vainqueur()
+	{
+		int index = 0;
+		int maxPts = 0;
+		
+		for(int i=0;i<this.getParticipants().size();i++)
+		{
+			if(this.nbPtsParticipant[this.getParticipants().get(i).getId()] > maxPts)
+			{
+				maxPts = this.nbPtsParticipant[this.getParticipants().get(i).getId()];
+				index = i;
+			}
+		}
+		
+		return this.getParticipants().get(index);
 	}
 	
 	/// Getters & Setters
