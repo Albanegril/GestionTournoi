@@ -17,7 +17,7 @@ public class AppliController
 
 	@GetMapping("/index")
 	public String index(Model model){
-        Adresse test1 = new Adresse("Peymeinade","Av des Jaisous",156);
+        Adresse test1 = new Adresse(0, "Peymeinade","156 Av des Jaisous");
         adrDAO.save(test1);
 	    return "index";
 	}

@@ -9,10 +9,12 @@ public class Match
 	private Equipe[] equipe;
 	private Resultat resultat;
 	private int id;
-	
+
 	/// Constructeurs
-	public Match() {}
-	
+	public Match()
+	{
+	}
+
 	public Match(int id, Equipe[] equipe, Date date, Adresse lieu)
 	{
 		super();
@@ -22,7 +24,14 @@ public class Match
 		this.equipe = equipe;
 	}
 
-	/// Getters & Setters
+	// XXX Méthodes
+
+	public String toString()
+	{
+		return "Match {id=" + id + ", equipes : " + equipe[0] + ", " + equipe[1] + ", " + date + ", " + lieu + "}";
+	}
+
+	// XXX Getters & Setters
 	public Date getDate()
 	{
 		return date;
