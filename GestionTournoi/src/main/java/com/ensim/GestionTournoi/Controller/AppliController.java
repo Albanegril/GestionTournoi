@@ -53,14 +53,6 @@ public class AppliController
         return "resultatMatch";
     }
 
-    @GetMapping("/affichageTournoi")
-    public String affichageTournoi(Model model)
-    {
-        return "affichageTournoi";
-    }
 
-    /*@RequestMapping(value = "message", method = RequestMethod.GET)
-    public String messages(Model model) {
-        return "";
-    }*/
+
 }
