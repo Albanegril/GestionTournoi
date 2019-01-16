@@ -3,6 +3,7 @@ package com.ensim.GestionTournoi.Model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import org.json.JSONObject;
 
 public class Coupe extends Tournoi {
 	
@@ -10,7 +11,8 @@ public class Coupe extends Tournoi {
 
 	private ArrayList<Equipe> enLice;
 	private ArrayList<Equipe> elimines;
-	
+
+
 	//XXX Constructeurs
 	
 	public Coupe() {	}

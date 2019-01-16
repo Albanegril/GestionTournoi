@@ -1,5 +1,7 @@
 package com.ensim.GestionTournoi.Model;
 
+import org.json.JSONObject;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,6 +27,53 @@ public abstract class Tournoi {
 	protected int matchID = 1;
 	protected int nbMatchJour;
 	private HashMap<Integer, Integer> adressesJouees = new HashMap<Integer, Integer>();
+
+	private String json = "";
+
+	public String getJson()
+	{
+		String result ="{\n\n" +
+				"  \"teams\": [\n\n";
+
+		for(Match m:matchs)
+		{
+			result+= "[\""+m.getEquipe(0).getNom()+"\",\""+m.getEquipe(1).getNom()+"\"]\n\n";
+		}
+		result+="],\n\n" +
+				"  \"results\": [\r\n" +
+				"      [";
+
+		int nbParticipant = this.participants.size();
+		int power = 0;
+		while(nbParticipant>0)
+		{
+			nbParticipant/=2;
+			power++;
+		}
+		int z =0;
+		for(int i = 0;i<power;i++)
+		{
+			result+="[";
+			for(int y = 0;y<participants.size();y++)
+			{
+				if(vainqueur==null)
+				{
+					result +="[null,null],";
+				}
+				else
+				{
+					result += "["+((ResultatDefault)matchs.get(z).getResultat()).getScore(0)
+						+","+((ResultatDefault)matchs.get(z).getResultat()).getScore(1)+"],";
+				}
+				z++;
+			}
+			result+="],\n\n";
+		}
+		result+="]\n\n" +
+				"  ]\n\n" +
+				"};";
+		return result;
+	}
 
 	public Tournoi() {}
 	

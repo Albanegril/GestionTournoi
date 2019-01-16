@@ -15,6 +15,7 @@ public class ResultatDefault extends Resultat
 		this.score = score;
 	}
 
+
 	/// Getters & Setters
 	public int getScore(int index)
 	{
