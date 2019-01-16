@@ -24,9 +24,6 @@ public class Coupe extends Tournoi implements Serializable {
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private Long idCoupe;
 
-	private List<Equipe> enLice;
-	private List<Equipe> elimines;
-
 	//XXX Constructors
 
 
