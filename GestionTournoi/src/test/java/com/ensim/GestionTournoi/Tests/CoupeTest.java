@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CoupeTest {
-	
+/*	
 	@Before
 	
 
@@ -14,5 +14,5 @@ public class CoupeTest {
 	public void test() {
 		fail("Not yet implemented");
 	}
-
+*/
 }

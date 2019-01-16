@@ -11,7 +11,6 @@ import java.util.Random;
 
 
 public abstract class Tournoi {
-	
 
     private Long id_tournoi;
 	protected Random rand = new Random();
