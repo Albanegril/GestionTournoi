@@ -11,6 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import javax.persistence.Transient;
+
+
 import org.json.JSONObject;
 
 @Entity
@@ -20,7 +23,16 @@ public class Coupe extends Tournoi implements Serializable {
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
 	private Long idCoupe;
+
 	private List<Equipe> enLice;
+	private List<Equipe> elimines;
+
+	//XXX Constructors
+
+
+	@Transient
+	private List<Equipe> enLice;
+	@Transient
 	private List<Equipe> elimines;
 
 	//XXX Constructors
@@ -59,7 +71,10 @@ public class Coupe extends Tournoi implements Serializable {
 			cal.setTime(this.getDateDebut());
 			cal.add(Calendar.DAY_OF_YEAR, nbMatch / this.nbMatchJour);
 			
-			matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse(0)));
+
+
+		//	matchs.add(new Match(this.genereMatchId(), tab, cal.getTime(), this.getMatchAdresse(0)));
+
 		}
 		
 		// TODO Auto-generated method stub
