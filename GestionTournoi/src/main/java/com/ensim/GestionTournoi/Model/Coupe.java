@@ -26,8 +26,6 @@ public class Coupe extends Tournoi implements Serializable {
 
 	//XXX Constructors
 
-	private List<Equipe> enLice;
-	private List<Equipe> elimines;
 
 	@Transient
 	private List<Equipe> enLice;
