@@ -1,5 +1,8 @@
 package com.ensim.GestionTournoi.Controller;
 
+import com.ensim.GestionTournoi.Model.Adresse;
+import com.ensim.GestionTournoi.Model.ModelDAO.AdresseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AppliController
 {
+    @Autowired
+    AdresseRepository adrDAO;
+
 	@GetMapping("/index")
 	public String index(Model model){
-		return "index";
+        Adresse test1 = new Adresse("Peymeinade","Av des Jaisous",156);
+        adrDAO.save(test1);
+	    return "index";
 	}
 
     @GetMapping("/connexion")

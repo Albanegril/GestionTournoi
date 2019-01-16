@@ -12,6 +12,5 @@ public class GestionTournoiApplication {
 		Coupe coupe = new Coupe();
 
 	}
-
 }
 
